@@ -49,4 +49,41 @@ def draw_window(red, yellow , red_bullets, yellow_bullets, red_health, yellow_he
 
     WIN.blit(red_health_text, (WIDTH - red_health_text.get_width, 10))
     WIN.blit(yellow_health_text, (10, 10))
-    
+
+    WIN.blit(YELLOW_SPACESHIP, (yellow.x, yellow.y))
+    WIN.blit(RED_SPACESHIP, (red.x, red.y))
+
+    for bullet in red_bullets:
+        pygame.draw.rect(WIN, RED, bullet)
+
+    for bullet in yellow_bullets:
+        pygame.draw.rect(WIN, YELLOW, bullet)
+
+    pygame.display.update()
+
+
+def yellow_handle_movement(keys_pressed, yellow):
+    if keys_pressed[pygame.K_a] and yellow.x - VEL > 0:
+        yellow.x -= VEL
+
+    if keys_pressed[pygame.K_d] and yellow.x + VEL + yellow.width < BORDER.x:
+        yellow.x += VEL
+
+    if keys_pressed[pygame.K_w] and yellow.y - VEL > 0:
+        yellow.y -= VEL
+
+    if keys_pressed[pygame.K_s] and yellow.y + VEL - yellow.height < HEIGHT:
+        yellow.y += VEL
+
+def red_handle_movement(keys_pressed, red):
+    if keys_pressed[pygame.K_a] and red.x - VEL > BORDER.x:
+        red.x -= x
+
+    if keys_pressed[pygame.K_d] and red.x + VEL + red.width < WIDTH:
+        red.x += VEL
+
+    if keys_pressed[pygame.K_w] and red.y - VEL > 0:
+        red.y -= VEL
+
+    if keys_pressed[pygame.K_s] and red.y + VEL + red.height < HEIGHT:
+        red.y += VEL
