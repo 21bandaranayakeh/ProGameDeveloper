@@ -15,7 +15,7 @@ YELLOW = (255, 255, 0)
 BORDER = pygame.Rect(WIDTH//2, 0, 10, HEIGHT)
 
 BULLET_HIT_SOUND = pygame.mixer.Sound('Grenade+1.mp3')
-BULLET_FIRE_SOUND = pygame.mixer.Sound(Gun+Silencer.mp3)
+BULLET_FIRE_SOUND = pygame.mixer.Sound('Gun+Silencer.mp3')
 
 HEALTH_FONT = pygame.font.SysFont('comicsans', 40)
 WINNER_FONT = pygame.font.SysFont('comicsans', 100)
@@ -78,12 +78,33 @@ def yellow_handle_movement(keys_pressed, yellow):
 def red_handle_movement(keys_pressed, red):
     if keys_pressed[pygame.K_a] and red.x - VEL > BORDER.x:
         red.x -= x
-
     if keys_pressed[pygame.K_d] and red.x + VEL + red.width < WIDTH:
         red.x += VEL
-
     if keys_pressed[pygame.K_w] and red.y - VEL > 0:
         red.y -= VEL
-
     if keys_pressed[pygame.K_s] and red.y + VEL + red.height < HEIGHT:
         red.y += VEL
+
+def handle_bullets(yellow_bullets, red_bullets, yellow, red):
+    for bullet in yellow_bullets:
+        bullet.x += BULLET_VEL
+        if red.colliderect(bullet):
+            pygame.event.post(pygame.event.Event(RED_HIT))
+            yellow_bullets.remove(bullet)
+        elif bullet.x > WIDTH:
+            yellow_bullets.remove(bullet)
+
+    for bullet in red_bullets:
+        bullet.x -= BULLET_VEL
+        if yellow.colliderect(bullet):
+            pygame.event.post(pygame.event.Event(YELLOW_HIT))
+            red_bullets.remove(bullet)
+        elif bullet.x < 0:
+            red_bullets.remove(bullet)
+
+def draw_winner(text):
+    draw_text = WINNER_FONT.render(text, True, WHITE)
+    WIN.blit(draw_text, (WIDTH/2 - draw_text.get_width()/2, HEIGHT/2 - draw_text.get_height()/2))
+    pygame.display.update()
+    pygame.time.delay(5000)
+    
