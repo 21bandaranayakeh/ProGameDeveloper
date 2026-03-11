@@ -142,48 +142,60 @@ while True:
         l[r][dict1[p + num]] = 'P'
         p = p + num
         sublist_max += 10
+    print(p)
+    print(num)
     print(p + num)
-    if p + num == 8:
+    if p == 8:
         l[0][7] = 'L1'
         l[1][7] = 'P'
+        p += 10
         print('Ladder')
-    elif p + num == 25:
+    elif p == 25:
         l[2][4] = 'L3'
         l[3][3] = 'P'
+        p += 9
         print('Ladder')
-    elif p + num == 41:
+    elif p == 41:
         l[4][0] = 'L5'
         l[5][3] = 'P'
+        p += 13
         print('Ladder')
-    elif p + num == 68:
+    elif p == 68:
         l[6][7] = 'L7'
         l[8][6] = 'P'
+        p += 19
         print('Ladder')
-    elif p + num == 89:
+    elif p == 89:
         l[8][8] = 'L9'
         l[9][5] = 'P'
+        p += 7
         print('Ladder')
-    elif p + num == 21:
+    elif p == 21:
         l[2][0] = 'S1'
         l[1][2] = 'P'
+        p -= 8
         print('Snake')
-    elif p + num == 46:
+    elif p == 46:
         l[4][5] = 'S3'
         l[2][8] = 'P'
+        p -= 17
         print('Snake')
-    elif p + num == 60:
+    elif p == 60:
         l[5][9] = 'S5'
         l[4][8] = 'P'
+        p -= 11
         print('Snake')
-    elif p + num == 79:
+    elif p == 79:
         l[7][8] = 'S7'
         l[7][0] = 'P'
+        p -= 8
         print('Snake')
-    elif p + num == 98:
+    elif p == 98:
         l[9][7] = 'S9'
         l[8][1] = 'P'
+        p -= 16
         print('Snake')
-    elif p + num >= 100:
+    elif p >= 100:
         print()
         print('You Win!')
         break
@@ -192,59 +204,3 @@ while True:
     show_grid()
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# while a != '-1':
-#     a = input('Please type anything to roll (-1 to stop).   ')
-#     num = randint(1, 6)
-#     print('You rolled {}'.format(num))
-#     s += num
-#     for i in snakes:
-#         if s == i:
-#             s -= 10
-#             print('snake, down 10 spots')
-#     for i in ladders:
-#         if s == i:
-#             s += 10
-#             print('ladder, up 10 spots')
-#     if s >= 100:
-#         print('You win')
-#         break
-#     print('Spot {}'.format(s))
